@@ -9,6 +9,16 @@ class BaiduTongjiMetrics(object):
 			if isinstance(value, bool) and value:
 				ret.append(key)
 		return ','.join(ret)
+	
+	def setAllTrue(self):
+		"""
+		设置所有指标为True
+		:return:
+		"""
+		for key, value in self.__dict__.items():
+			if isinstance(value, bool):
+				self.__dict__[key] = True
+		return self
 
 
 class TimeTrendRptMetrics(BaiduTongjiMetrics):
