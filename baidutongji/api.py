@@ -198,13 +198,15 @@ def getTrendLatest(access_token: str, site_id: str, metrics: TrendLatestMetrics,
 	return response.json()
 
 
-def getSourceAll(access_token: str, site_id: str, metrics: SourceMetrics, 
+def getSourceAll(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: SourceMetrics, 
 	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
 	visitor: Optional[VisitorType]=None, clientDevice: Optional[ClientDevice]=None) -> dict:
 	"""
 	获取来源报表
 	:param access_token:
 	:param site_id:
+	:param start_date:
+	:param end_date:
 	:param metrics:
 	:param start_date2:
 	:param end_date2:
@@ -215,6 +217,8 @@ def getSourceAll(access_token: str, site_id: str, metrics: SourceMetrics,
 	params = {
 		'access_token': access_token,
 		'site_id': site_id,
+		'start_date': start_date.strftime('%Y%m%d'),
+		'end_date': end_date.strftime('%Y%m%d'),
 		'metrics': metrics.getMetrics(),
 		'method': 'source/all/a'
 	}
@@ -229,13 +233,15 @@ def getSourceAll(access_token: str, site_id: str, metrics: SourceMetrics,
 	return response.json()
 
 
-def getSourceEngine(access_token: str, site_id: str, metrics: SourceMetrics,
+def getSourceEngine(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: SourceMetrics,
 	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
 	visitor: Optional[VisitorType]=None, clientDevice: Optional[ClientDevice]=None, area: Optional[Region]=None) -> dict:
 	"""
 	获取搜索引擎报表
 	:param access_token:
 	:param site_id:
+	:param start_date:
+	:param end_date:
 	:param metrics:
 	:param start_date2:
 	:param end_date2:
@@ -247,6 +253,8 @@ def getSourceEngine(access_token: str, site_id: str, metrics: SourceMetrics,
 	params = {
 		'access_token': access_token,
 		'site_id': site_id,
+		'start_date': start_date.strftime('%Y%m%d'),
+		'end_date': end_date.strftime('%Y%m%d'),
 		'metrics': metrics.getMetrics(),
 		'method': 'source/engine/a'
 	}
@@ -263,13 +271,15 @@ def getSourceEngine(access_token: str, site_id: str, metrics: SourceMetrics,
 	return response.json()
 
 
-def getSourceSearchword(access_token: str, site_id: str, metrics: SourceMetrics,
+def getSourceSearchword(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: SourceMetrics,
 	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
 	visitor: Optional[VisitorType]=None, clientDevice: Optional[ClientDevice]=None, source: Optional[Source]=None) -> dict:
 	"""
 	获取搜索词报表
 	:param access_token:
 	:param site_id:
+	:param start_date:
+	:param end_date:
 	:param metrics:
 	:param start_date2:
 	:param end_date2:
@@ -281,6 +291,8 @@ def getSourceSearchword(access_token: str, site_id: str, metrics: SourceMetrics,
 	params = {
 		'access_token': access_token,
 		'site_id': site_id,
+		'start_date': start_date.strftime('%Y%m%d'),
+		'end_date': end_date.strftime('%Y%m%d'),
 		'metrics': metrics.getMetrics(),
 		'method': 'source/searchword/a'
 	}
@@ -297,13 +309,15 @@ def getSourceSearchword(access_token: str, site_id: str, metrics: SourceMetrics,
 	return response.json()
 
 
-def getSourceLink(access_token: str, site_id: str, metrics: SourceMetrics,
+def getSourceLink(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: SourceMetrics,
 	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
 	visitor: Optional[VisitorType]=None, clientDevice: Optional[ClientDevice]=None, domainType: Optional[DomainType]=None) -> dict:
 	"""
 	获取外部链接报表
 	:param access_token:
 	:param site_id:
+	:param start_date:
+	:param end_date:
 	:param metrics:
 	:param start_date2:
 	:param end_date2:
@@ -315,6 +329,8 @@ def getSourceLink(access_token: str, site_id: str, metrics: SourceMetrics,
 	params = {
 		'access_token': access_token,
 		'site_id': site_id,
+		'start_date': start_date.strftime('%Y%m%d'),
+		'end_date': end_date.strftime('%Y%m%d'),
 		'metrics': metrics.getMetrics(),
 		'method': 'source/link/a'
 	}
@@ -331,13 +347,15 @@ def getSourceLink(access_token: str, site_id: str, metrics: SourceMetrics,
 	return response.json()
 
 
-def getVisitToppage(access_token: str, site_id: str, metrics: VisitToppageMetrics,
+def getVisitToppage(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: VisitToppageMetrics,
 	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
 	source: Optional[Source]=None, visitor: Optional[VisitorType]=None) -> dict:
 	"""
 	获取受访页面报表
 	:param access_token:
 	:param site_id:
+	:param start_date:
+	:param end_date:
 	:param metrics:
 	:param start_date2:
 	:param end_date2:
@@ -348,6 +366,8 @@ def getVisitToppage(access_token: str, site_id: str, metrics: VisitToppageMetric
 	params = {
 		'access_token': access_token,
 		'site_id': site_id,
+		'start_date': start_date.strftime('%Y%m%d'),
+		'end_date': end_date.strftime('%Y%m%d'),
 		'metrics': metrics.getMetrics(),
 		'method': 'visit/toppage/a'
 	}
@@ -362,12 +382,14 @@ def getVisitToppage(access_token: str, site_id: str, metrics: VisitToppageMetric
 	return response.json()
 
 
-def getVisitLandingpage(access_token: str, site_id: str, metrics: VisitLandingpageMetrics,
+def getVisitLandingpage(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: VisitLandingpageMetrics,
 	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None) -> dict:
 	"""
 	获取入口页面报表
 	:param access_token:
 	:param site_id:
+	:param start_date:
+	:param end_date:
 	:param metrics:
 	:param start_date2:
 	:param end_date2:
@@ -376,6 +398,8 @@ def getVisitLandingpage(access_token: str, site_id: str, metrics: VisitLandingpa
 	params = {
 		'access_token': access_token,
 		'site_id': site_id,
+		'start_date': start_date.strftime('%Y%m%d'),
+		'end_date': end_date.strftime('%Y%m%d'),
 		'metrics': metrics.getMetrics(),
 		'method': 'visit/landingpage/a'
 	}
@@ -386,13 +410,15 @@ def getVisitLandingpage(access_token: str, site_id: str, metrics: VisitLandingpa
 	return response.json()
 
 
-def getVisitTopdomain(access_token: str, site_id: str, metrics: VisitTopdomainMetrics,
+def getVisitTopdomain(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: VisitTopdomainMetrics,
 	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
 	source: Optional[Source]=None, visitor: Optional[VisitorType]=None) -> dict:
 	"""
 	获取受访域名报表
 	:param access_token:
 	:param site_id:
+	:param start_date:
+	:param end_date:
 	:param metrics:
 	:param start_date2:
 	:param end_date2:
@@ -403,6 +429,8 @@ def getVisitTopdomain(access_token: str, site_id: str, metrics: VisitTopdomainMe
 	params = {
 		'access_token': access_token,
 		'site_id': site_id,
+		'start_date': start_date.strftime('%Y%m%d'),
+		'end_date': end_date.strftime('%Y%m%d'),
 		'metrics': metrics.getMetrics(),
 		'method': 'visit/topdomain/a'
 	}
@@ -417,13 +445,15 @@ def getVisitTopdomain(access_token: str, site_id: str, metrics: VisitTopdomainMe
 	return response.json()
 
 
-def getVisitDistrict(access_token: str, site_id: str, metrics: SourceMetrics,
+def getVisitDistrict(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: SourceMetrics,
 	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
 	source: Optional[Source]=None, visitor: Optional[VisitorType]=None) -> dict:
 	"""
 	获取地区分布报表
 	:param access_token:
 	:param site_id:
+	:param start_date:
+	:param end_date:
 	:param metrics:
 	:param start_date2:
 	:param end_date2:
@@ -434,6 +464,8 @@ def getVisitDistrict(access_token: str, site_id: str, metrics: SourceMetrics,
 	params = {
 		'access_token': access_token,
 		'site_id': site_id,
+		'start_date': start_date.strftime('%Y%m%d'),
+		'end_date': end_date.strftime('%Y%m%d'),
 		'metrics': metrics.getMetrics(),
 		'method': 'visit/district/a'
 	}
@@ -447,13 +479,15 @@ def getVisitDistrict(access_token: str, site_id: str, metrics: SourceMetrics,
 	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
-def getVisitWorld(access_token: str, site_id: str, metrics: SourceMetrics,
+def getVisitWorld(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: SourceMetrics,
 	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
 	source: Optional[Source]=None, visitor: Optional[VisitorType]=None) -> dict:
 	"""
 	获取地区分布（按国家）报表
 	:param access_token:
 	:param site_id:
+	:param start_date:
+	:param end_date:
 	:param metrics:
 	:param start_date2:
 	:param end_date2:
@@ -464,6 +498,8 @@ def getVisitWorld(access_token: str, site_id: str, metrics: SourceMetrics,
 	params = {
 		'access_token': access_token,
 		'site_id': site_id,
+		'start_date': start_date.strftime('%Y%m%d'),
+		'end_date': end_date.strftime('%Y%m%d'),
 		'metrics': metrics.getMetrics(),
 		'method': 'visit/world/a'
 	}
