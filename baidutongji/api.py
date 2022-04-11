@@ -125,8 +125,8 @@ def getCommonTrackRpt(access_token: str, site_id: str, start_date: datetime.date
 
 
 def getTrendTime(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: TrendTimeMetrics, 
-	start_date2: Optional[datetime.date], end_date2: Optional[datetime.date], 
-	source: Optional[Source], clientDevice: Optional[ClientDevice], visitor: Optional[VisitorType], gran: Optional[TimeGran], area: Optional[Region]) -> dict:
+	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
+	source: Optional[Source]=None, clientDevice: Optional[ClientDevice]=None, visitor: Optional[VisitorType]=None, gran: Optional[TimeGran]=None, area: Optional[Region]=None) -> dict:
 	"""
 	获取趋势分析报表
 	:param access_token:
@@ -168,7 +168,7 @@ def getTrendTime(access_token: str, site_id: str, start_date: datetime.date, end
 	return response.json()
 
 
-def getTrendLatest(access_token: str, site_id: str, metrics: TrendLatestMetrics, source: Optional[Source], clientDevice: Optional[ClientDevice], visitor: Optional[VisitorType], area: Optional[Region]) -> dict:
+def getTrendLatest(access_token: str, site_id: str, metrics: TrendLatestMetrics, source: Optional[Source]=None, clientDevice: Optional[ClientDevice]=None, visitor: Optional[VisitorType]=None, area: Optional[Region]=None) -> dict:
 	"""
 	获取实时访客报表
 	:param access_token:
@@ -199,8 +199,8 @@ def getTrendLatest(access_token: str, site_id: str, metrics: TrendLatestMetrics,
 
 
 def getSourceAll(access_token: str, site_id: str, metrics: SourceMetrics, 
-	start_date2: Optional[datetime.date], end_date2: Optional[datetime.date], 
-	visitor: Optional[VisitorType], clientDevice: Optional[ClientDevice]) -> dict:
+	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
+	visitor: Optional[VisitorType]=None, clientDevice: Optional[ClientDevice]=None) -> dict:
 	"""
 	获取来源报表
 	:param access_token:
@@ -230,8 +230,8 @@ def getSourceAll(access_token: str, site_id: str, metrics: SourceMetrics,
 
 
 def getSourceEngine(access_token: str, site_id: str, metrics: SourceMetrics,
-	start_date2: Optional[datetime.date], end_date2: Optional[datetime.date], 
-	visitor: Optional[VisitorType], clientDevice: Optional[ClientDevice], area: Optional[Region]) -> dict:
+	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
+	visitor: Optional[VisitorType]=None, clientDevice: Optional[ClientDevice]=None, area: Optional[Region]=None) -> dict:
 	"""
 	获取搜索引擎报表
 	:param access_token:
@@ -264,8 +264,8 @@ def getSourceEngine(access_token: str, site_id: str, metrics: SourceMetrics,
 
 
 def getSourceSearchword(access_token: str, site_id: str, metrics: SourceMetrics,
-	start_date2: Optional[datetime.date], end_date2: Optional[datetime.date], 
-	visitor: Optional[VisitorType], clientDevice: Optional[ClientDevice], source: Optional[Source]) -> dict:
+	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
+	visitor: Optional[VisitorType]=None, clientDevice: Optional[ClientDevice]=None, source: Optional[Source]=None) -> dict:
 	"""
 	获取搜索词报表
 	:param access_token:
@@ -298,8 +298,8 @@ def getSourceSearchword(access_token: str, site_id: str, metrics: SourceMetrics,
 
 
 def getSourceLink(access_token: str, site_id: str, metrics: SourceMetrics,
-	start_date2: Optional[datetime.date], end_date2: Optional[datetime.date], 
-	visitor: Optional[VisitorType], clientDevice: Optional[ClientDevice], domainType: Optional[DomainType]) -> dict:
+	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
+	visitor: Optional[VisitorType]=None, clientDevice: Optional[ClientDevice]=None, domainType: Optional[DomainType]=None) -> dict:
 	"""
 	获取外部链接报表
 	:param access_token:
@@ -332,8 +332,8 @@ def getSourceLink(access_token: str, site_id: str, metrics: SourceMetrics,
 
 
 def getVisitToppage(access_token: str, site_id: str, metrics: VisitToppageMetrics,
-	start_date2: Optional[datetime.date], end_date2: Optional[datetime.date], 
-	source: Optional[Source], visitor: Optional[VisitorType]) -> dict:
+	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
+	source: Optional[Source]=None, visitor: Optional[VisitorType]=None) -> dict:
 	"""
 	获取受访页面报表
 	:param access_token:
@@ -363,7 +363,7 @@ def getVisitToppage(access_token: str, site_id: str, metrics: VisitToppageMetric
 
 
 def getVisitLandingpage(access_token: str, site_id: str, metrics: VisitLandingpageMetrics,
-	start_date2: Optional[datetime.date], end_date2: Optional[datetime.date]) -> dict:
+	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None) -> dict:
 	"""
 	获取入口页面报表
 	:param access_token:
@@ -387,8 +387,8 @@ def getVisitLandingpage(access_token: str, site_id: str, metrics: VisitLandingpa
 
 
 def getVisitTopdomain(access_token: str, site_id: str, metrics: VisitTopdomainMetrics,
-	start_date2: Optional[datetime.date], end_date2: Optional[datetime.date], 
-	source: Optional[Source], visitor: Optional[VisitorType]) -> dict:
+	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
+	source: Optional[Source]=None, visitor: Optional[VisitorType]=None) -> dict:
 	"""
 	获取受访域名报表
 	:param access_token:
@@ -418,8 +418,8 @@ def getVisitTopdomain(access_token: str, site_id: str, metrics: VisitTopdomainMe
 
 
 def getVisitDistrict(access_token: str, site_id: str, metrics: SourceMetrics,
-	start_date2: Optional[datetime.date], end_date2: Optional[datetime.date], 
-	source: Optional[Source], visitor: Optional[VisitorType]) -> dict:
+	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
+	source: Optional[Source]=None, visitor: Optional[VisitorType]=None) -> dict:
 	"""
 	获取地区分布报表
 	:param access_token:
@@ -448,8 +448,8 @@ def getVisitDistrict(access_token: str, site_id: str, metrics: SourceMetrics,
 	return response.json()
 
 def getVisitWorld(access_token: str, site_id: str, metrics: SourceMetrics,
-	start_date2: Optional[datetime.date], end_date2: Optional[datetime.date], 
-	source: Optional[Source], visitor: Optional[VisitorType]) -> dict:
+	start_date2: Optional[datetime.date]=None, end_date2: Optional[datetime.date]=None, 
+	source: Optional[Source]=None, visitor: Optional[VisitorType]=None) -> dict:
 	"""
 	获取地区分布（按国家）报表
 	:param access_token:
