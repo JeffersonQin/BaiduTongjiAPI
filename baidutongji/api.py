@@ -1,3 +1,4 @@
+import time
 import traceback
 from typing import Optional
 import datetime
@@ -15,12 +16,13 @@ GET_SITE_LIST_URL = 'https://openapi.baidu.com/rest/2.0/tongji/config/getSiteLis
 GET_REPORT_DATA_URL = 'https://openapi.baidu.com/rest/2.0/tongji/report/getData'
 
 
-def GET(retry=5, silent=True, **kwargs):
+def GET(retry=5, retry_delay=5, silent=True, **kwargs):
 	retried = 0
 	while retried < retry:
 		try:
 			return requests.get(**kwargs)
 		except Exception as e:
+			time.sleep(retry_delay)
 			retried += 1
 			if not silent:
 				print(repr(e))
