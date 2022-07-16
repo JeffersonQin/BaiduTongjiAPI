@@ -1,3 +1,4 @@
+import traceback
 from typing import Optional
 import datetime
 import requests
@@ -12,6 +13,21 @@ __all__ = ['refreshAccessToken', 'getSiteList', 'getTimeTrendRpt', 'getDistrictR
 GET_TOKEN_URL = 'https://openapi.baidu.com/oauth/2.0/token'
 GET_SITE_LIST_URL = 'https://openapi.baidu.com/rest/2.0/tongji/config/getSiteList'
 GET_REPORT_DATA_URL = 'https://openapi.baidu.com/rest/2.0/tongji/report/getData'
+
+
+def GET(retry=5, silent=True, **kwargs):
+	retried = 0
+	while retried < retry:
+		try:
+			return requests.get(**kwargs)
+		except Exception as e:
+			retried += 1
+			if not silent:
+				print(repr(e))
+				print(traceback.format_exc())
+				print(f"REQUEST FAILED FOR {retried} TIMES. RETRYING...")
+				print(e)
+			continue
 
 
 def cleanParams(params: dict) -> dict:
@@ -41,7 +57,7 @@ def refreshAccessToken(client_id, client_secret, refresh_token) -> dict:
 		'client_secret': client_secret,
 		'grant_type': 'refresh_token'
 	}
-	response = requests.get(GET_TOKEN_URL, params=cleanParams(params))
+	response = GET(url=GET_TOKEN_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -54,7 +70,7 @@ def getSiteList(access_token) -> dict:
 	params = {
 		'access_token': access_token
 	}
-	response = requests.get(GET_SITE_LIST_URL, params=cleanParams(params))
+	response = GET(url=GET_SITE_LIST_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -76,7 +92,7 @@ def getTimeTrendRpt(access_token: str, site_id: str, start_date: datetime.date, 
 		'metrics': metrics.getMetrics(),
 		'method': 'overview/getTimeTrendRpt'
 	}
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -98,7 +114,7 @@ def getDistrictRpt(access_token: str, site_id: str, start_date: datetime.date, e
 		'metrics': metrics.getMetrics(),
 		'method': 'overview/getDistrictRpt'
 	}
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -120,7 +136,7 @@ def getCommonTrackRpt(access_token: str, site_id: str, start_date: datetime.date
 		'metrics': metrics.getMetrics(),
 		'method': 'overview/getCommonTrackRpt'
 	}
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -164,7 +180,7 @@ def getTrendTime(access_token: str, site_id: str, start_date: datetime.date, end
 		params['gran'] = gran.value
 	if area is not None:
 		params['area'] = area
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -194,7 +210,7 @@ def getTrendLatest(access_token: str, site_id: str, metrics: TrendLatestMetrics,
 		params['visitor'] = visitor.value
 	if area is not None:
 		params['area'] = area
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -229,7 +245,7 @@ def getSourceAll(access_token: str, site_id: str, start_date: datetime.date, end
 		params['visitor'] = visitor.value
 	if clientDevice is not None:
 		params['clientDevice'] = clientDevice.value
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -267,7 +283,7 @@ def getSourceEngine(access_token: str, site_id: str, start_date: datetime.date, 
 		params['clientDevice'] = clientDevice.value
 	if area is not None:
 		params['area'] = area
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -305,7 +321,7 @@ def getSourceSearchword(access_token: str, site_id: str, start_date: datetime.da
 		params['clientDevice'] = clientDevice.value
 	if source is not None:
 		params['source'] = source.value
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -343,7 +359,7 @@ def getSourceLink(access_token: str, site_id: str, start_date: datetime.date, en
 		params['clientDevice'] = clientDevice.value
 	if domainType is not None:
 		params['domainType'] = domainType.value
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -378,7 +394,7 @@ def getVisitToppage(access_token: str, site_id: str, start_date: datetime.date, 
 		params['source'] = source.value
 	if visitor is not None:
 		params['visitor'] = visitor.value
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -406,7 +422,7 @@ def getVisitLandingpage(access_token: str, site_id: str, start_date: datetime.da
 	if start_date2 is not None and end_date2 is not None:
 		params['start_date2'] = start_date2.strftime('%Y%m%d')
 		params['end_date2'] = end_date2.strftime('%Y%m%d')
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -441,7 +457,7 @@ def getVisitTopdomain(access_token: str, site_id: str, start_date: datetime.date
 		params['source'] = source.value
 	if visitor is not None:
 		params['visitor'] = visitor.value
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 
@@ -476,7 +492,7 @@ def getVisitDistrict(access_token: str, site_id: str, start_date: datetime.date,
 		params['source'] = source.value
 	if visitor is not None:
 		params['visitor'] = visitor.value
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
 
 def getVisitWorld(access_token: str, site_id: str, start_date: datetime.date, end_date: datetime.date, metrics: SourceMetrics,
@@ -510,5 +526,5 @@ def getVisitWorld(access_token: str, site_id: str, start_date: datetime.date, en
 		params['source'] = source.value
 	if visitor is not None:
 		params['visitor'] = visitor.value
-	response = requests.get(GET_REPORT_DATA_URL, params=cleanParams(params))
+	response = GET(url=GET_REPORT_DATA_URL, params=cleanParams(params))
 	return response.json()
