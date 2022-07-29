@@ -29,7 +29,7 @@ def GET(retry=5, retry_delay=5, silent=True, **kwargs):
 				print(traceback.format_exc())
 				print(f"REQUEST FAILED FOR {retried} TIMES. RETRYING...")
 				print(e)
-			continue
+	raise Exception('DOWNLOAD FAILED')
 
 
 def cleanParams(params: dict) -> dict:
